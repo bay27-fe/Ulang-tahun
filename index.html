@@ -1,17 +1,12 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Selamat Ulang Tahun Mey</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: black;
-      color: white;
-      overflow: hidden;
-    }
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: radial-gradient(ellipse at center, #1f1c2c 0%, #928dab 100%);
@@ -36,22 +31,6 @@
       opacity: 1;
       transform: scale(1);
       z-index: 1;
-    }
-    .countdown {
-      font-size: 3rem;
-      font-family: 'Orbitron', sans-serif;
-      text-shadow: 0 0 10px rgba(255,255,255,0.6);
-      color: pink;
-      animation: pulseGlow 2s infinite;
-    }
-      font-size: 3rem;
-      font-family: 'Orbitron', sans-serif;
-      text-shadow: 0 0 10px rgba(255,255,255,0.6);
-      animation: pulseGlow 2s infinite;
-    }
-    @keyframes pulseGlow {
-      0%, 100% { text-shadow: 0 0 10px rgba(255,255,255,0.6); }
-      50% { text-shadow: 0 0 20px rgba(255,255,255,1); }
     }
     .text-seq span {
       opacity: 0;
@@ -122,64 +101,36 @@
       background: red;
       border-radius: 50%;
     }
-    .heart::before {
-      top: -10px;
-      left: 0;
-    }
-    .heart::after {
-      left: -10px;
-      top: 0;
-    }
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { top: 0; left: -10px; }
     @keyframes floatHeart {
-      0% {
-        transform: translateY(0) scale(1) rotate(45deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100px) scale(1.2) rotate(45deg);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) scale(1) rotate(45deg); opacity: 1; }
+      100% { transform: translateY(-100px) scale(1.2) rotate(45deg); opacity: 0; }
     }
   </style>
 </head>
-<body><canvas class="confetti" id="confetti-canvas"></canvas>
-
+<body>
+  <canvas class="confetti" id="confetti-canvas"></canvas>
   <div class="stars" id="stars"></div>
-  <div class="stars" id="hearts"></div>  <div class="slide active" id="countdown-slide">
-    <div class="countdown" id="countdown"></div>
-  </div>  <div class="slide" id="slide1">
+  <div class="stars" id="hearts"></div>
+
+  <div class="slide active" id="slide1">
     <h1 style="font-size: 3rem; font-family: 'Dancing Script', cursive;">HAPPY BIRTHDAY MEY</h1>
-  </div>  <div class="slide" id="slide2">
+  </div>
+  <div class="slide" id="slide2">
     <div class="text-seq" id="text-seq-1"></div>
     <button id="next2" style="display:none">Lanjut</button>
-  </div>  <div class="slide" id="slide3">
+  </div>
+  <div class="slide" id="slide3">
     <div class="text-seq" id="text-seq-2"></div>
     <button id="next3" style="display:none">Lanjut</button>
-  </div>  <div class="slide" id="slide4">
+  </div>
+  <div class="slide" id="slide4">
     <div class="text-seq" id="text-seq-3"></div>
-  </div>  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>  <script>
-    const countdownEl = document.getElementById("countdown");
-    const target = new Date();
-    target.setHours(24, 0, 0, 0);
+  </div>
 
-    function updateCountdown() {
-      const now = new Date();
-      const diff = target - now;
-      if (diff <= 0) {
-        showSlide("slide1");
-        launchConfetti();
-        setTimeout(() => showSlide("slide2"), 5000);
-      } else {
-        const hours = String(Math.floor((diff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
-        const mins = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
-        const secs = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
-        countdownEl.textContent = `Waktu menuju ulang tahun Mey (${target.toLocaleDateString('id-ID')} 00:00): ${hours}:${mins}:${secs}`;
-        requestAnimationFrame(updateCountdown);
-      }
-    }
-
-    updateCountdown();
-
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
     function showSlide(id) {
       document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
       document.getElementById(id).classList.add('active');
@@ -206,10 +157,9 @@
     }
 
     function launchConfetti() {
-      const duration = 3 * 1000;
+      const duration = 3000;
       const animationEnd = Date.now() + duration;
       const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
       const interval = setInterval(() => {
         const timeLeft = animationEnd - Date.now();
         if (timeLeft <= 0) return clearInterval(interval);
@@ -238,14 +188,18 @@
     ];
 
     const msg3 = [
-  "Setiap langkahmu penuh dengan cinta,",
-  "Menunjukkan perhatian yang tulus dan sabar,",
-  "Kamu adalah wanita yang sangat baik,",
-  "Yang selalu membuat hati bayu terharu,",
-  "Dengan segala pengorbanan dan kesungguhanmu."
-];
+      "Setiap langkahmu penuh dengan cinta,",
+      "Menunjukkan perhatian yang tulus dan sabar,",
+      "Kamu adalah pria yang sangat baik,",
+      "Yang selalu membuat hati wanita terharu,",
+      "Dengan segala pengorbanan dan kesungguhanmu."
+    ];
 
     document.addEventListener('DOMContentLoaded', () => {
+      showSlide("slide1");
+      launchConfetti();
+      setTimeout(() => showSlide("slide2"), 5000);
+
       document.getElementById("slide2").addEventListener('transitionend', () => {
         showTextSeq("text-seq-1", msg1, "next2", () => showSlide("slide3"));
       });
@@ -256,7 +210,6 @@
         showTextSeq("text-seq-3", msg3);
       });
 
-      // Stars
       const stars = document.getElementById("stars");
       for (let i = 0; i < 150; i++) {
         const star = document.createElement("div");
@@ -266,7 +219,6 @@
         stars.appendChild(star);
       }
 
-      // Hearts
       const hearts = document.getElementById("hearts");
       setInterval(() => {
         const heart = document.createElement("div");
@@ -277,5 +229,6 @@
         setTimeout(() => heart.remove(), 4000);
       }, 500);
     });
-  </script></body>
+  </script>
+</body>
 </html>
