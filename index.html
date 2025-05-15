@@ -3,232 +3,192 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Selamat Ulang Tahun Mey</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <title>Isi Hati Bayu</title>
+
+  <!-- Font & AOS -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: radial-gradient(ellipse at center, #1f1c2c 0%, #928dab 100%);
-      color: white;
-      overflow: hidden;
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
     }
-    .slide {
-      position: absolute;
-      width: 100vw;
-      height: 100vh;
-      top: 0;
-      left: 0;
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    section {
+      position: relative;
+      min-height: 100vh;
+      padding: 100px 20px;
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       text-align: center;
-      opacity: 0;
-      transform: scale(1.1);
-      transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+      background: linear-gradient(to bottom right, #0b0b0b, #1a1a1a);
     }
-    .active {
-      opacity: 1;
-      transform: scale(1);
-      z-index: 1;
+    h1, h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3em;
+      color: #ff9ec4;
+      margin-bottom: 20px;
     }
-    .text-seq span {
-      opacity: 0;
-      display: inline-block;
-      transition: opacity 0.5s;
+    p {
+      font-size: 1.2em;
+      max-width: 700px;
+      line-height: 1.8;
+      color: #f4d7e2;
     }
-    .text-seq span.visible {
-      opacity: 1;
+
+    nav {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 999;
     }
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 1.2rem;
-      background: #ffffff10;
-      border: 2px solid white;
-      color: white;
+    nav a {
+      margin: 0 6px;
+      text-decoration: none;
+      color: #ff9ec4;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #ff6ba3;
+    }
+
+    .glitter {
+      pointer-events: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('https://media.giphy.com/media/l0MYC0LajbaPoEADu/giphy.gif') repeat;
+      background-size: cover;
+      opacity: 0.15;
+      z-index: 0;
+    }
+
+    .siluet {
+      width: 120px;
+      height: auto;
+      margin-bottom: 20px;
+      opacity: 0.8;
+      filter: invert(1);
+    }
+
+    .music-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #1a1a1a;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 30px;
+      box-shadow: 0 4px 8px rgba(255,255,255,0.1);
+      font-size: 14px;
+      color: #ff9ec4;
       cursor: pointer;
-      border-radius: 8px;
-      transition: background 0.3s;
-    }
-    button:hover {
-      background: white;
-      color: black;
-    }
-    .stars {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      background: transparent;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    .star {
-      width: 2px;
-      height: 2px;
-      background: white;
-      position: absolute;
-      animation: twinkle 2s infinite;
-    }
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.2; }
-      50% { opacity: 1; }
-    }
-    canvas.confetti {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 9999;
-    }
-    .heart {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: red;
-      transform: rotate(45deg);
-      animation: floatHeart 4s infinite;
-    }
-    .heart::before, .heart::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: red;
-      border-radius: 50%;
-    }
-    .heart::before { top: -10px; left: 0; }
-    .heart::after { top: 0; left: -10px; }
-    @keyframes floatHeart {
-      0% { transform: translateY(0) scale(1) rotate(45deg); opacity: 1; }
-      100% { transform: translateY(-100px) scale(1.2) rotate(45deg); opacity: 0; }
+      z-index: 999;
     }
   </style>
 </head>
 <body>
-  <canvas class="confetti" id="confetti-canvas"></canvas>
-  <div class="stars" id="stars"></div>
-  <div class="stars" id="hearts"></div>
 
-  <div class="slide active" id="slide1">
-    <h1 style="font-size: 3rem; font-family: 'Dancing Script', cursive;">HAPPY BIRTHDAY MEY</h1>
-  </div>
-  <div class="slide" id="slide2">
-    <div class="text-seq" id="text-seq-1"></div>
-    <button id="next2" style="display:none">Lanjut</button>
-  </div>
-  <div class="slide" id="slide3">
-    <div class="text-seq" id="text-seq-2"></div>
-    <button id="next3" style="display:none">Lanjut</button>
-  </div>
-  <div class="slide" id="slide4">
-    <div class="text-seq" id="text-seq-3"></div>
-  </div>
+  <!-- Musik -->
+  <audio id="bg-music" autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/16/audio_d3e0e3dbaa.mp3?filename=romantic-piano-110054.mp3" type="audio/mpeg">
+  </audio>
+  <button class="music-control" onclick="toggleMusic()">Pause Music</button>
 
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <!-- Efek Glitter -->
+  <div class="glitter"></div>
+
+  <!-- Navigasi -->
+  <nav>
+    <a href="#page1">1</a>
+    <a href="#page2">2</a>
+    <a href="#page3">3</a>
+    <a href="#page4">4</a>
+    <a href="#page5">5</a>
+    <a href="#page6">6</a>
+  </nav>
+
+  <!-- Halaman 1 -->
+  <section id="page1" data-aos="fade-up">
+    <img src="https://cdn-icons-png.flaticon.com/512/3040/3040701.png" alt="siluet pasangan" class="siluet"/>
+    <h1>Selamat datang di isi hati Bayu</h1>
+    <p>Tempat di mana kata menjadi pelukan, dan rindu menjadi cerita yang abadi...</p>
+  </section>
+
+  <!-- Halaman 2 -->
+  <section id="page2" data-aos="fade-up">
+    <h2> Tatap Pertama</h2>
+    <p>
+      Sore itu langit tak hanya jingga,<br>
+      Tapi menyimpan cahaya matamu.<br>
+      Tak banyak kata, tak banyak tanya,<br>
+      Tapi dunia terasa lebih syahdu.
+    </p>
+  </section>
+
+  <!-- Halaman 3 -->
+  <section id="page3" data-aos="fade-up">
+    <h2> Bersama Waktu</h2>
+    <p>
+      Kita tumbuh tak hanya dalam cinta, tapi dalam pengertian. Dalam setiap pelukan dan canda, kita menjadi tempat pulang yang saling melengkapi.
+    </p>
+  </section>
+
+  <!-- Halaman 4 -->
+  <section id="page4" data-aos="fade-up">
+    <h2> Menjadi Kita</h2>
+    <p>
+      Aku tak ingin menjadi alasanmu tersenyum,<br>
+      Tapi aku ingin menjadi alasanmu bertahan.<br>
+      Karena saat kita jadi kita,<br>
+      Dunia jadi lebih bisa dimengerti.
+    </p>
+  </section>
+
+  <!-- Halaman 5 -->
+  <section id="page5" data-aos="fade-up">
+    <h2> Janji Dalam Hati</h2>
+    <p>
+      Kita tak butuh saksi, karena hati tahu janji. Kita tak butuh kata-kata mewah, cukup mata yang saling percaya bahwa ini akan lama.
+    </p>
+  </section>
+
+  <!-- Halaman 6 -->
+  <section id="page6" data-aos="fade-up">
+    <h2> Selamanya Itu Kamu</h2>
+    <p>
+      Tak ada yang lebih indah dari mencintaimu dalam diam,<br>
+      Merindukanmu tanpa alasan,<br>
+      Menemanimu tanpa batas waktu,<br>
+      Dan memilihmu... selalu.
+    </p>
+  </section>
+
+  <!-- Script AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    function showSlide(id) {
-      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
+    AOS.init({ duration: 1500, once: true });
 
-    function showTextSeq(id, texts, buttonId, callback) {
-      const container = document.getElementById(id);
-      container.innerHTML = '';
-      let i = 0;
-      function nextWord() {
-        if (i < texts.length) {
-          const span = document.createElement('span');
-          span.textContent = texts[i] + ' ';
-          container.appendChild(span);
-          setTimeout(() => span.classList.add('visible'), 100);
-          i++;
-          setTimeout(nextWord, 700);
-        } else if (buttonId) {
-          document.getElementById(buttonId).style.display = 'inline-block';
-          document.getElementById(buttonId).onclick = callback;
-        }
+    function toggleMusic() {
+      const music = document.getElementById("bg-music");
+      const button = document.querySelector(".music-control");
+      if (music.paused) {
+        music.play();
+        button.textContent = "Pause Music";
+      } else {
+        music.pause();
+        button.textContent = "Play Music";
       }
-      nextWord();
     }
-
-    function launchConfetti() {
-      const duration = 3000;
-      const animationEnd = Date.now() + duration;
-      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-      const interval = setInterval(() => {
-        const timeLeft = animationEnd - Date.now();
-        if (timeLeft <= 0) return clearInterval(interval);
-        const particleCount = 50 * (timeLeft / duration);
-        confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 } }));
-      }, 250);
-    }
-
-    const msg1 = [
-      "Selamat ulang tahun yang ke 25 Mey!",
-      "Semoga panjang umur, sehat selalu,",
-      "Impianmu tercapai,",
-      "Dan selalu dikelilingi cinta dan kebahagiaan."
-    ];
-
-    const msg2 = [
-      "Selamat ulang tahun, sayang!",
-      "Terima kasih sudah menjadi bagian terindah dalam hidupku.",
-      "Semoga kamu selalu bahagia dan sukses dalam meraih semua impianmu.",
-      "Di hari spesialmu ini, aku ingin mengucapkan terima kasih",
-      "Atas semua cinta dan kebahagiaan yang telah kamu berikan.",
-      "Semoga kita selalu bersama dalam suka dan duka.",
-      "Setiap tahun aku bersyukur bisa merayakan ulang tahunmu bersamamu.",
-      "Semoga kita selalu bahagia dan langgeng.",
-      "I love you Mey."
-    ];
-
-    const msg3 = [
-      "Setiap langkahmu penuh dengan cinta,",
-      "Menunjukkan perhatian yang tulus dan sabar,",
-      "Kamu adalah pria yang sangat baik,",
-      "Yang selalu membuat hati wanita terharu,",
-      "Dengan segala pengorbanan dan kesungguhanmu."
-    ];
-
-    document.addEventListener('DOMContentLoaded', () => {
-      showSlide("slide1");
-      launchConfetti();
-      setTimeout(() => showSlide("slide2"), 5000);
-
-      document.getElementById("slide2").addEventListener('transitionend', () => {
-        showTextSeq("text-seq-1", msg1, "next2", () => showSlide("slide3"));
-      });
-      document.getElementById("slide3").addEventListener('transitionend', () => {
-        showTextSeq("text-seq-2", msg2, "next3", () => showSlide("slide4"));
-      });
-      document.getElementById("slide4").addEventListener('transitionend', () => {
-        showTextSeq("text-seq-3", msg3);
-      });
-
-      const stars = document.getElementById("stars");
-      for (let i = 0; i < 150; i++) {
-        const star = document.createElement("div");
-        star.className = "star";
-        star.style.top = `${Math.random() * 100}%`;
-        star.style.left = `${Math.random() * 100}%`;
-        stars.appendChild(star);
-      }
-
-      const hearts = document.getElementById("hearts");
-      setInterval(() => {
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.style.left = `${Math.random() * 100}%`;
-        heart.style.bottom = "0";
-        hearts.appendChild(heart);
-        setTimeout(() => heart.remove(), 4000);
-      }, 500);
-    });
   </script>
 </body>
 </html>
